@@ -1,5 +1,6 @@
-package com.transplace.LiveTracking.dao;
+package com.transplace.LiveTracking.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,7 +16,9 @@ import lombok.Data;
 @Entity
 @Table(name = "CheckCall")
 @Data
-public class CheckCall {
+public class CheckCall implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

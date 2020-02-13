@@ -1,7 +1,6 @@
-package com.transplace.LiveTracking.dao;
+package com.transplace.LiveTracking.model;
 
-import java.util.Arrays;
-import java.util.Calendar;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +18,9 @@ import lombok.Data;
 @Entity
 @Table(name="ShipmentInfo")
 @Data
-public class ShipmentInfo {
+public class ShipmentInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

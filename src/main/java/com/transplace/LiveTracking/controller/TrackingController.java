@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.transplace.LiveTracking.dao.CheckCall;
-import com.transplace.LiveTracking.dao.ShipmentInfo;
+import com.transplace.LiveTracking.model.CheckCall;
+import com.transplace.LiveTracking.model.ShipmentInfo;
 import com.transplace.LiveTracking.repo.CheckCallRepository;
 import com.transplace.LiveTracking.repo.ShipmentRepository;
 import com.transplace.LiveTracking.service.TrackingService;

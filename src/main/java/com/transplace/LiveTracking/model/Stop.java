@@ -1,5 +1,6 @@
-package com.transplace.LiveTracking.dao;
+package com.transplace.LiveTracking.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,9 @@ import lombok.Data;
 @Entity
 @Table(name="Stop")
 @Data
-public class Stop {
+public class Stop implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
