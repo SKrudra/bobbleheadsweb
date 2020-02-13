@@ -19,7 +19,7 @@ public class CheckCall {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String type;
+	private String checkCalltype;
 	private Date createdDateTime;
 	private String locationName;
 	private Double latitude;
