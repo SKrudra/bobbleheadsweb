@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
 
 
-    L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+    L.mapquest.key = 'ciTzzbfKR5ZGZu9tLPkPldCqq9DfPryD';
 
     this.map = L.mapquest.map('map', {
 
@@ -32,5 +32,74 @@ export class AppComponent {
 
     this.map.addControl(L.mapquest.control());
 
+    var directions = L.mapquest.directions();
+    directions.route({
+      start: 'San Francisco, CA',
+      end: 'San Jose, CA'
+    }, (err, response) => { console.log(response);
+      var customLayer = L.mapquest.directionsLayer({
+        startMarker: {
+          icon: 'circle',
+          iconOptions: {
+            size: 'sm',
+            primaryColor: '#1fc715',
+            secondaryColor: '#1fc715',
+            symbol: 'A'
+          },
+          title: 'Drag to change location'
+        },
+        endMarker: {
+          icon: 'circle',
+          iconOptions: {
+            size: 'sm',
+            primaryColor: '#e9304f',
+            secondaryColor: '#e9304f',
+            symbol: 'B'
+          },
+          title: 'Drag to change location'
+        },
+        routeRibbon: {
+          color: "#2aa6ce",
+          opacity: 1.0,
+          showTraffic: false
+        },
+        directionsResponse: response
+      });
+      customLayer.addTo(this.map);
+    });
+
+
+  }
+
+  createMap(err, response) {
+       var customLayer = L.mapquest.directionsLayer({
+      startMarker: {
+        icon: 'circle',
+        iconOptions: {
+          size: 'sm',
+          primaryColor: '#1fc715',
+          secondaryColor: '#1fc715',
+          symbol: 'A'
+        },
+        title: 'Drag to change location'
+      },
+      endMarker: {
+        icon: 'circle',
+        iconOptions: {
+          size: 'sm',
+          primaryColor: '#e9304f',
+          secondaryColor: '#e9304f',
+          symbol: 'B'
+        },
+        title: 'Drag to change location'
+      },
+      routeRibbon: {
+        color: "#2aa6ce",
+        opacity: 1.0,
+        showTraffic: false
+      },
+      directionsResponse: response
+    });
+    customLayer.addTo(this.map);
   }
 }
