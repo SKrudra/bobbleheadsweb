@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Entity
@@ -34,8 +37,10 @@ public class Stop implements Serializable{
     private String contactName;
     @ManyToOne
     @JoinColumn(name = "shipmentId")
+    @JsonBackReference
     private ShipmentInfo shipment;
     @OneToMany(mappedBy="stop",fetch=FetchType.LAZY)
+    @JsonManagedReference
 	private List<CheckCall> checkcalls;
 	
     

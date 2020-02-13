@@ -11,11 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Entity
 @Table(name = "CheckCall")
 @Data
+
 public class CheckCall implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -35,8 +39,10 @@ public class CheckCall implements Serializable{
 	private String comments;
 	@ManyToOne
 	@JoinColumn(name="shipmentId", nullable=false)
+	@JsonBackReference//	@JsonManagedReference
 	private ShipmentInfo shipment;
 	@ManyToOne
 	@JoinColumn(name = "stopId", nullable=true)
+	@JsonBackReference
 	private Stop stop;
 }
