@@ -1,5 +1,6 @@
 package com.transplace.LiveTracking.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,21 +27,24 @@ public class TrackingController {
 	private CheckCallRepository checkCallRepository;
 	
 	@GetMapping("shipmentDetails")
-	public ResponseEntity<ShipmentInfo> getshipmentDetails(@RequestParam(name="shipId", required=false ) Long shipmentId){
+	public ResponseEntity<ShipmentInfo> getShipmentDetails(@RequestParam(name="shipId", required=false ) Long shipmentId){
 		if(shipmentId == null) {
-		List<ShipmentInfo> shipmentInfo = shipmentRepo.findAll();
-		shipmentInfo.forEach((shipment)->{
+		List<ShipmentInfo> shipmentInfos = shipmentRepo.findAll();
+		List<ShipmentInfo> selectedShipmentInfo = new ArrayList<>();
+		shipmentInfos.forEach((shipment)->{
 			if("TENDER ACCEPT".equals(shipment.getStatus())) {
-				new ResponseEntity<ShipmentInfo>(shipment, HttpStatus.OK);
+				selectedShipmentInfo.add(shipment);
 			}
 		});
+		if (selectedShipmentInfo.size()>0) {
+			return new ResponseEntity<ShipmentInfo>(selectedShipmentInfo.get(0), HttpStatus.OK);
+		}
 		} else {
 			Optional<ShipmentInfo> shipmentInfo = shipmentRepo.findById(shipmentId);
 			if(shipmentInfo.isPresent()) {
-				new ResponseEntity<ShipmentInfo>(shipmentInfo.get(), HttpStatus.OK);
+				return new ResponseEntity<ShipmentInfo>(shipmentInfo.get(), HttpStatus.OK);
 			}
 		}
-		
 		
 		return new ResponseEntity<ShipmentInfo>(HttpStatus.NO_CONTENT);
 	}
