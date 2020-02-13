@@ -29,10 +29,11 @@ public class CheckCall {
 	private String stopType;
 	private String city;
 	private String state;
+	private String comments;
 	@ManyToOne
-	@JoinColumn(name = "shipmentId")
-	private ShipmentInfoDAO shipment;
+	@JoinColumn(name="shipmentId", nullable=false)
+	private ShipmentInfo shipment;
 	@ManyToOne
-	@JoinColumn(name = "stopId")
+	@JoinColumn(name = "stopId", nullable=true)
 	private Stop stop;
 }

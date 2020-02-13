@@ -31,8 +31,8 @@ public class Stop {
     private String contactName;
     @ManyToOne
     @JoinColumn(name = "shipmentId")
-    private ShipmentInfoDAO shipment;
-    @OneToMany(fetch=FetchType.LAZY)
+    private ShipmentInfo shipment;
+    @OneToMany(mappedBy="stop",fetch=FetchType.LAZY)
 	private List<CheckCall> checkcalls;
     
 }
