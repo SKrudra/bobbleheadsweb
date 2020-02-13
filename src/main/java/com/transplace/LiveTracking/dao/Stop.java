@@ -34,5 +34,6 @@ public class Stop {
     private ShipmentInfo shipment;
     @OneToMany(mappedBy="stop",fetch=FetchType.LAZY)
 	private List<CheckCall> checkcalls;
+	
     
 }

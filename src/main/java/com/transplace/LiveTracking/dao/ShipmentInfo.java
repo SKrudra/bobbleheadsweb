@@ -1,5 +1,7 @@
 package com.transplace.LiveTracking.dao;
 
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,5 +46,15 @@ public class ShipmentInfo {
 	private List<Stop> stops;	
 	@OneToMany(mappedBy="shipment", fetch=FetchType.LAZY)
 	private List<CheckCall> checkcalls;
-		
+	
+	
+//	public static ShipmentInfo getDummyData(long shipmentId) {
+//		
+//		Stop origin=new Stop(1l,1, "Origin","NEW YORK","NY","10021","USA","Puru");
+//		Stop dest=new Stop(2l,99, "Dest","AURORA","IL","60504","USA","Puru");
+//		
+//		return new ShipmentInfo(shipmentId, Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), "Pending", Arrays.asList(origin,dest));
+//	}
+
+
 }
