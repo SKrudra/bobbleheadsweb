@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MouseEvent } from '@agm/core';
+import {Component} from '@angular/core';
+
 declare var L : any;
 @Component({
   selector: 'app-root',
