@@ -25,7 +25,7 @@ export class AppComponent {
 
       layers: L.mapquest.tileLayer('map'),
 
-      zoom: 12
+      zoom: 6
 
     });
 
