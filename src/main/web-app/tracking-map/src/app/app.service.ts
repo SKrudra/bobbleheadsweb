@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppService {
 
-  url = 'shipmentDetails';
+  url = '/getshipmentDetails';
   constructor(private http: HttpClient) { }
 
   getShipmentDetails(shipId) {

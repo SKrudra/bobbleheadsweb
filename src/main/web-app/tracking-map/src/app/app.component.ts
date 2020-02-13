@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 
 import {AppService} from './app.service';
+import {ActivatedRoute} from "@angular/router";
+import {Shipment} from "./models";
 
 declare var L : any;
 @Component({
@@ -11,22 +13,38 @@ declare var L : any;
 export class AppComponent {
   private map: any;
   shipmentId;
+  shipmentData: Shipment;
 
 
-  constructor(private service: AppService) {
+  constructor(private service: AppService, private route: ActivatedRoute) {
   }
-
-  track(){
-    console.log("shipmentId: ", this.shipmentId);
-    this.service.getShipmentDetails(this.shipmentId).subscribe(data => {
-      console.log("data: ", data);
-    });
-  }
-
-
 
   ngOnInit() {
 
+    this.route.queryParams
+      .subscribe(
+      params => {
+        this.shipmentId = params['shipment'];
+        if(this.shipmentId) {
+          this.service.getShipmentDetails(this.shipmentId)
+            .subscribe((data: Shipment) => {
+              this.shipmentData = data;
+              this.initMap();
+            });
+        }
+
+      });
+  }
+
+  private getLocation(isPickup: boolean) {
+    if(isPickup) {
+      return this.shipmentData.stops[0].city + ' ' + this.shipmentData.stops[0].state;
+    } else {
+      return this.shipmentData.stops[1].city + ' ' + this.shipmentData.stops[1].state;
+    }
+  }
+
+  private initMap() {
 
     L.mapquest.key = 'ciTzzbfKR5ZGZu9tLPkPldCqq9DfPryD';
 
@@ -45,9 +63,9 @@ export class AppComponent {
 
     var directions = L.mapquest.directions();
     directions.route({
-      start: 'San Francisco, CA',
-      end: 'San Jose, CA'
-    }, (err, response) => { console.log(response);
+      start: this.getLocation(true),
+      end: this.getLocation(false)
+    }, (err, response) => {
       var customLayer = L.mapquest.directionsLayer({
         startMarker: {
           icon: 'circle',
@@ -55,7 +73,7 @@ export class AppComponent {
             size: 'sm',
             primaryColor: '#1fc715',
             secondaryColor: '#1fc715',
-            symbol: 'A'
+            symbol: 'P'
           },
           title: 'Drag to change location'
         },
@@ -65,7 +83,7 @@ export class AppComponent {
             size: 'sm',
             primaryColor: '#e9304f',
             secondaryColor: '#e9304f',
-            symbol: 'B'
+            symbol: 'D'
           },
           title: 'Drag to change location'
         },
@@ -79,38 +97,5 @@ export class AppComponent {
       customLayer.addTo(this.map);
     });
 
-
-  }
-
-  createMap(err, response) {
-       var customLayer = L.mapquest.directionsLayer({
-      startMarker: {
-        icon: 'circle',
-        iconOptions: {
-          size: 'sm',
-          primaryColor: '#1fc715',
-          secondaryColor: '#1fc715',
-          symbol: 'A'
-        },
-        title: 'Drag to change location'
-      },
-      endMarker: {
-        icon: 'circle',
-        iconOptions: {
-          size: 'sm',
-          primaryColor: '#e9304f',
-          secondaryColor: '#e9304f',
-          symbol: 'B'
-        },
-        title: 'Drag to change location'
-      },
-      routeRibbon: {
-        color: "#2aa6ce",
-        opacity: 1.0,
-        showTraffic: false
-      },
-      directionsResponse: response
-    });
-    customLayer.addTo(this.map);
   }
 }
