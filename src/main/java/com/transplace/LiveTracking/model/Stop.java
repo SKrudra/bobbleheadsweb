@@ -35,13 +35,11 @@ public class Stop implements Serializable{
     private String postalCode;
     private String country;
     private String contactName;
+    private Double latitude;
+    private Double longitude;
     @ManyToOne
     @JoinColumn(name = "shipmentId")
     @JsonBackReference
     private ShipmentInfo shipment;
-    @OneToMany(mappedBy="stop",fetch=FetchType.LAZY)
-    @JsonManagedReference
-	private List<CheckCall> checkcalls;
-	
-    
+   
 }

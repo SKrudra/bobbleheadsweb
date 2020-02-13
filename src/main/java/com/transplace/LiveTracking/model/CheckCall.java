@@ -41,8 +41,5 @@ public class CheckCall implements Serializable{
 	@JoinColumn(name="shipmentId", nullable=false)
 	@JsonBackReference//	@JsonManagedReference
 	private ShipmentInfo shipment;
-	@ManyToOne
-	@JoinColumn(name = "stopId", nullable=true)
-	@JsonBackReference
-	private Stop stop;
+	
 }
