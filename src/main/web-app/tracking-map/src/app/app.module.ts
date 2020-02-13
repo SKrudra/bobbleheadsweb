@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {AppService} from './app.service';
 import {RouterModule} from "@angular/router";
+import {MatCardModule} from "@angular/material/card";
+import {MatCommonModule} from "@angular/material/core";
+import {MatIconModule, MatTableModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -15,6 +18,10 @@ import {RouterModule} from "@angular/router";
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatCardModule,
+    MatCommonModule,
+    MatIconModule,
+    MatTableModule,
     RouterModule.forRoot([])
   ],
   providers: [AppService],

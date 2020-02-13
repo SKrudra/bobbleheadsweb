@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {AppService} from './app.service';
 import {ActivatedRoute} from "@angular/router";
-import {Shipment} from "./models";
+import {CheckCall, Shipment} from "./models";
 
 declare var L : any;
 @Component({
@@ -14,7 +14,8 @@ export class AppComponent {
   private map: any;
   shipmentId;
   shipmentData: Shipment;
-
+  displayedColumns: string[] = ['checkCalltype', 'createdDateTime', 'locationName', 'stopType', 'comments'];
+  dataSource: CheckCall[];
 
   constructor(private service: AppService, private route: ActivatedRoute) {
   }
@@ -29,6 +30,7 @@ export class AppComponent {
           this.service.getShipmentDetails(this.shipmentId)
             .subscribe((data: Shipment) => {
               this.shipmentData = data;
+              this.dataSource = this.shipmentData.checkcalls;
               this.initMap();
             });
         }

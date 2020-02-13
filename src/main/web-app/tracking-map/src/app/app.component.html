@@ -1,3 +1,46 @@
-<div style="width: 750px;  height:800px; float:left; margin:10px;">
+<div style="width: 600px;  height:800px; float:left; margin:10px;">
   <div id="map" style="height:100%; width:100%;"></div>
 </div>
+<mat-card *ngIf="shipmentData">
+  <div>
+  <ul>
+    <li><mat-icon>place</mat-icon>{{ '  PICKUP - ' +shipmentData.stops[0].city + ', '+ shipmentData.stops[0].state + ' (' + shipmentData.stops[0].postalCode + '), ' + shipmentData.stops[0].country }}</li>
+    <li><mat-icon>place</mat-icon>{{'  DROPOFF - ' +shipmentData.stops[1].city + ', '+ shipmentData.stops[1].state + ' (' + shipmentData.stops[1].postalCode + '), ' + shipmentData.stops[1].country }}</li>
+  </ul>
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="checkCalltype">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.checkCalltype}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDateTime">
+      <th mat-header-cell *matHeaderCellDef> Actual Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdDateTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="locationName">
+      <th mat-header-cell *matHeaderCellDef> Location </th>
+      <td mat-cell *matCellDef="let element"> {{element.locationName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stopType">
+      <th mat-header-cell *matHeaderCellDef> Stop Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.stopType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <th mat-header-cell *matHeaderCellDef> Comments </th>
+      <td mat-cell *matCellDef="let element"> {{element.comments}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  </div>
+</mat-card>
