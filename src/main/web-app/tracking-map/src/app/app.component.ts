@@ -8,10 +8,16 @@ declare var L : any;
 })
 export class AppComponent {
   private map: any;
+  shipmentId;
 
 
   constructor() {
   }
+
+  track(){
+    console.log("shipmentId: ", this.shipmentId);
+  }
+
 
 
   ngOnInit() {
