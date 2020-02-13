@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MouseEvent } from '@agm/core';
+import {Component} from '@angular/core';
+
 declare var L : any;
 @Component({
   selector: 'app-root',
@@ -25,7 +25,7 @@ export class AppComponent {
 
       layers: L.mapquest.tileLayer('map'),
 
-      zoom: 12
+      zoom: 6
 
     });
 
