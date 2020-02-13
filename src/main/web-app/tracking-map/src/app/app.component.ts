@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 
+import {AppService} from './app.service';
+
 declare var L : any;
 @Component({
   selector: 'app-root',
@@ -11,11 +13,14 @@ export class AppComponent {
   shipmentId;
 
 
-  constructor() {
+  constructor(private service: AppService) {
   }
 
   track(){
     console.log("shipmentId: ", this.shipmentId);
+    this.service.getShipmentDetails(this.shipmentId).subscribe(data => {
+      console.log("data: ", data);
+    });
   }
 
 
