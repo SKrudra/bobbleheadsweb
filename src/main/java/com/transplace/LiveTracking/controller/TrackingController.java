@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.transplace.LiveTracking.model.CheckCall;
 import com.transplace.LiveTracking.model.ShipmentInfo;
 import com.transplace.LiveTracking.repo.CheckCallRepository;
 import com.transplace.LiveTracking.repo.ShipmentRepository;
+import com.transplace.LiveTracking.to.CheckCallTO;
 
 @RestController
 public class TrackingController {
@@ -49,9 +51,9 @@ public class TrackingController {
 		return new ResponseEntity<ShipmentInfo>(HttpStatus.NO_CONTENT);
 	}
 	
-	@RequestMapping("saveCheckCall")
-	public void updateCheckCalls(@RequestBody CheckCall checkCall) {
-		
+	@PostMapping("saveCheckCall" )
+	public void updateCheckCalls(@RequestBody CheckCallTO checkCallto) {
+		CheckCall checkCall=checkCallto.covertToEntity();
 		checkCallRepository.save(checkCall);
 		
 	}
