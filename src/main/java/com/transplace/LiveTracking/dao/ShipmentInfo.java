@@ -17,14 +17,12 @@ import lombok.Data;
 @Entity
 @Table(name="ShipmentInfo")
 @Data
-public class ShipmentInfoDAO {
+public class ShipmentInfo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@OneToMany
-	@Column
-	private List<Stop> stops;
+	
 	@Column
 	private Date earliestOriginDate;
 	@Column
@@ -35,8 +33,16 @@ public class ShipmentInfoDAO {
 	private Date latestDestinationDate;
 	@Column
 	private String status;
+	@Column
+	private String Comments;
+	@Column
+	private String healthStatusCode; // change to Enum
+	@Column
+	private String healthReason;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="shipment", fetch=FetchType.LAZY)
+	private List<Stop> stops;	
+	@OneToMany(mappedBy="shipment", fetch=FetchType.LAZY)
 	private List<CheckCall> checkcalls;
 		
 }
