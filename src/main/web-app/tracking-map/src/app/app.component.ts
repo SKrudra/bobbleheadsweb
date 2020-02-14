@@ -20,7 +20,7 @@ export class AppComponent {
 
   lastLocationCheckCall: CheckCall;
 
-  route: any;
+  gCustomLayer: any;
 
   constructor(private service: AppService, private route: ActivatedRoute) {
   }
@@ -44,7 +44,6 @@ export class AppComponent {
               this.initMap();
             });
         }
-
       });
   }
 
@@ -82,12 +81,12 @@ export class AppComponent {
     setInterval(()=> {
       this.service.getCheckcalls(this.shipmentId, this.checkcallId).subscribe((a: CheckCall[])=> {
         if(a && a.length > 0) {
-          a.sort((cc1, cc2) => cc2 - cc1);
+          a.sort((cc1, cc2) => cc2.id - cc1.id);
           let filteredCheckCalls = a.filter((cc) => cc.checkCalltype === 'CHECKCALL');
           this.lastLocationCheckCall = filteredCheckCalls? filteredCheckCalls[0] : null;
           this.dataSource = a.concat(this.dataSource);
           this.checkcallId = a[0];
-          this.map.removeLayer(this.route);
+          this.map.removeLayer(this.gCustomLayer);
           this.addDirectionLayer();
         }
       });
@@ -139,7 +138,7 @@ export class AppComponent {
         directionsResponse: response
       });
       customLayer.addTo(this.map);
-      this.route = customLayer;
+      this.gCustomLayer = customLayer;
     });
   }
 }
