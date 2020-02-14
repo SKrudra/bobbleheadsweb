@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.transplace.LiveTracking.constants.CheckCallEnum;
 import com.transplace.LiveTracking.constants.MEStatusEnum;
 import com.transplace.LiveTracking.model.CheckCall;
 import com.transplace.LiveTracking.model.ShipmentInfo;
@@ -61,13 +62,23 @@ public class TrackingController {
 			Optional<ShipmentInfo> shipmentInfo= shipmentRepo.findById(checkCall.getShipment().getId());
 			if (shipmentInfo.isPresent()) {
 				ShipmentInfo shipment =shipmentInfo.get();
-				if("PICKUP".equals(checkCall.getStopType())) {
+				if("PICKUP".equals(checkCall.getStopType()) && MEStatusEnum.TENDER_ACCEPT.name().equals(shipment.getStatus())) {
 					shipment.setStatus(MEStatusEnum.INTRANSIT.toString());
-				}else {
+					shipmentRepo.save(shipment);
+				}else if("DROPOFF".equals(checkCall.getStopType()) && MEStatusEnum.INTRANSIT.name().equals(shipment.getStatus())) {
 					shipment.setStatus(MEStatusEnum.DELIVERED.toString());
+					shipmentRepo.save(shipment);
 				}
 			}
 			
+		} else if(CheckCallEnum.ETA.name().equals(checkCall.getCheckCalltype())){
+			Optional<ShipmentInfo> shipmentInfo= shipmentRepo.findById(checkCall.getShipment().getId());
+			if (shipmentInfo.isPresent()) {
+				ShipmentInfo shipment =shipmentInfo.get();
+				shipment.setHealthReason(checkCall.getStatusCode());
+				shipment.setHealthStatusCode(checkCall.getStatusDesc());
+				shipmentRepo.save(shipment);
+			}
 		}
 		
 	}
