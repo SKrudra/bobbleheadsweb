@@ -13,9 +13,14 @@ declare var L : any;
 export class AppComponent {
   private map: any;
   shipmentId;
+  checkcallId;
   shipmentData: Shipment;
   displayedColumns: string[] = ['checkCalltype', 'createdDateTime', 'locationName', 'stopType', 'comments'];
   dataSource: CheckCall[];
+
+  lastLocationCheckCall: CheckCall;
+
+  gCustomLayer: any;
 
   constructor(private service: AppService, private route: ActivatedRoute) {
   }
@@ -31,10 +36,14 @@ export class AppComponent {
             .subscribe((data: Shipment) => {
               this.shipmentData = data;
               this.dataSource = this.shipmentData.checkcalls;
+              this.dataSource.sort((cc1, cc2) => cc2.id - cc1.id );
+              this.checkcallId = this.dataSource[0].id;
+
+              let filteredCheckCalls = this.dataSource.filter((cc) => cc.checkCalltype === 'CHECKCALL');
+              this.lastLocationCheckCall = filteredCheckCalls? filteredCheckCalls[0] : null;
               this.initMap();
             });
         }
-
       });
   }
 
@@ -46,7 +55,10 @@ export class AppComponent {
     }
   }
   getCurrentLatLong() {
-    let waypoints: any[] = [[35.691544, -105.944183]];
+    let waypoints: any[] = [];
+    if(this.lastLocationCheckCall) {
+      waypoints.push([this.lastLocationCheckCall.latitude, this.lastLocationCheckCall.longitude]);
+    }
     return waypoints;
   }
   private initMap() {
@@ -65,10 +77,23 @@ export class AppComponent {
 
 
     this.map.addControl(L.mapquest.control());
-    var customIcon = L.mapquest.icons.circle({
-      primaryColor: '#3b5998'
-    });
+    this.addDirectionLayer();
+    setInterval(()=> {
+      this.service.getCheckcalls(this.shipmentId, this.checkcallId).subscribe((a: CheckCall[])=> {
+        if(a && a.length > 0) {
+          a.sort((cc1, cc2) => cc2.id - cc1.id);
+          let filteredCheckCalls = a.filter((cc) => cc.checkCalltype === 'CHECKCALL');
+          this.lastLocationCheckCall = filteredCheckCalls? filteredCheckCalls[0] : null;
+          this.dataSource = a.concat(this.dataSource);
+          this.checkcallId = a[0];
+          this.map.removeLayer(this.gCustomLayer);
+          this.addDirectionLayer();
+        }
+      });
+    }, 5000)
+  }
 
+  addDirectionLayer() {
     var directions = L.mapquest.directions();
     directions.route({
       start: this.getLocation(true),
@@ -113,7 +138,7 @@ export class AppComponent {
         directionsResponse: response
       });
       customLayer.addTo(this.map);
+      this.gCustomLayer = customLayer;
     });
-
   }
 }

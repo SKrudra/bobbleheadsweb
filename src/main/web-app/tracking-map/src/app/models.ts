@@ -15,6 +15,7 @@ export interface Stop {
   state: string;
   postalCode: number;
   contactName: string;
+  country: string;
   latitude: number;
   longitude: number;
 }
