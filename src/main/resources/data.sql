@@ -7,8 +7,8 @@ HEALTH_STATUS_CODE,HEALTH_REASON) values (201,{ts '2020-02-12 18:47:52.69'},{ts 
 insert into Stop(ID,STOP_SEQ, NAME,CITY,STATE,POSTAL_CODE,COUNTRY,LATITUDE,LONGITUDE,CONTACT_NAME,SHIPMENT_ID) values
 (301,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','201'),
 (302,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','201'),
-(301,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','202'),
-(302,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','202');
+(303,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','202'),
+(304,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','202');
 
 insert into Check_Call (ID,CHECK_CALLTYPE,CREATED_DATE_TIME,LOCATION_NAME,LATITUDE,LONGITUDE,STATUS_DESC, STATUS_CODE,STOP_TYPE,CITY,
 STATE,COMMENTS,SHIPMENT_ID) values 
