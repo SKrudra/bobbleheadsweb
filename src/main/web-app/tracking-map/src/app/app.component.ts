@@ -85,7 +85,7 @@ export class AppComponent {
           let filteredCheckCalls = a.filter((cc) => cc.checkCalltype === 'CHECKCALL');
           this.lastLocationCheckCall = filteredCheckCalls? filteredCheckCalls[0] : null;
           this.dataSource = a.concat(this.dataSource);
-          this.checkcallId = a[0];
+          this.checkcallId = a[0].id;
           this.map.removeLayer(this.gCustomLayer);
           this.addDirectionLayer();
         }
