@@ -18,6 +18,6 @@ null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
 null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
 (103,'DEPARTURE',{ts '2020-02-13 18:47:52.69'},'Frisco',33.1507,121.8863,'Distance to Stop 43.09 miles',
 null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
-(104,'CHECKCALL',{ts '2020-02-14 15:43:50'},'Phoenix',33.4484,112.0740,'Distance to Stop 42.5 miles',
+(104,'CHECKCALL',{ts '2020-02-14 15:43:50'},'Phoenix',33.448376,-112.074036,'Distance to Stop 42.5 miles',
 null,null,'ANN ARBOR','MI','ON TIME',201);
 
