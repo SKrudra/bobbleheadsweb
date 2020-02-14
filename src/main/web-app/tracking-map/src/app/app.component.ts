@@ -45,7 +45,10 @@ export class AppComponent {
       return this.shipmentData.stops[1].city + ' ' + this.shipmentData.stops[1].state;
     }
   }
-
+  getCurrentLatLong() {
+    let waypoints: any[] = [[35.691544, -105.944183]];
+    return waypoints;
+  }
   private initMap() {
 
     L.mapquest.key = 'ciTzzbfKR5ZGZu9tLPkPldCqq9DfPryD';
@@ -62,11 +65,15 @@ export class AppComponent {
 
 
     this.map.addControl(L.mapquest.control());
+    var customIcon = L.mapquest.icons.circle({
+      primaryColor: '#3b5998'
+    });
 
     var directions = L.mapquest.directions();
     directions.route({
       start: this.getLocation(true),
-      end: this.getLocation(false)
+      end: this.getLocation(false),
+      waypoints: this.getCurrentLatLong()
     }, (err, response) => {
       var customLayer = L.mapquest.directionsLayer({
         startMarker: {
@@ -77,7 +84,7 @@ export class AppComponent {
             secondaryColor: '#1fc715',
             symbol: 'P'
           },
-          title: 'Drag to change location'
+          title: 'Pickup'
         },
         endMarker: {
           icon: 'circle',
@@ -87,7 +94,16 @@ export class AppComponent {
             secondaryColor: '#e9304f',
             symbol: 'D'
           },
-          title: 'Drag to change location'
+          title: 'Dropoff'
+        },
+        waypointMarker: {
+          icon: 'circle',
+          iconOptions: {
+            size: 'sm',
+            primaryColor: '#21DBA4',
+            secondaryColor: '#000000',
+            symbol: 'o'
+          },
         },
         routeRibbon: {
           color: "#2aa6ce",
