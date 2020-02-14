@@ -34,7 +34,11 @@ public class LiveTrackingController {
 	public ResponseEntity<List<CheckCall>> getCheckCalls(@RequestParam("shipId") Long  shipmentId, @RequestParam(name="checkCallId",required=false) Long  checkCallId){
 		checkCallId=checkCallId==null?0:checkCallId;
 		Optional<List<CheckCall>> checkCalls = checkCallRepository.findByShipmentIdAndIdGreaterThan(shipmentId,checkCallId);
+		
 		if(checkCalls.isPresent()) {
+			checkCalls.get().sort((checkCall1,checkCall2)->{
+				return checkCall2.getId().compareTo(checkCall1.getId());
+			});
 			return new ResponseEntity<List<CheckCall>>(checkCalls.get(),HttpStatus.OK);
 		}
 		return new ResponseEntity<List<CheckCall>>(HttpStatus.NO_CONTENT);
