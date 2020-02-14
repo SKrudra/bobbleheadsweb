@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -27,6 +28,7 @@ public class CheckCall implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String checkCalltype;
+	@JsonFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	private Date createdDateTime;
 	private String locationName;
 	private Double latitude;
