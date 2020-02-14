@@ -29,6 +29,7 @@ public class CheckCallTO {
 	public CheckCall covertToEntity() {
 		CheckCall checkCall = new CheckCall();
 		checkCall.setCheckCalltype(checkCalltype);
+		checkCall.setCreatedDateTime(createdDateTime);
 		checkCall.setCity(city);
 		checkCall.setComments(comments);
 		checkCall.setLatitude(latitude);

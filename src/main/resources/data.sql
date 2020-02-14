@@ -1,12 +1,23 @@
 insert into Shipment_Info(ID,EARLIEST_ORIGIN_DATE,LATEST_ORIGIN_DATE,EARLIEST_DESTINATION_DATE,LATEST_DESTINATION_DATE,STATUS,COMMENTS,
 HEALTH_STATUS_CODE,HEALTH_REASON) values (201,{ts '2020-02-12 18:47:52.69'},{ts '2020-02-12 20:47:52.69'},
-{ts '2020-02-13 08:47:52.69'},{ts '2020-02-13 15:47:52.69'},'TENDER ACCEPT','Handel with care','GOOD','Fast driving');
-/*please use locations from the USA. Judges won't know Warngal*/
+{ts '2020-02-13 08:47:52.69'},{ts '2020-02-13 15:47:52.69'},'IN TRANSIT','Handle with care','GOOD','Fast driving'),
+(202,{ts '2020-02-14 18:47:52.69'},{ts '2020-02-14 20:47:52.69'},
+{ts '2020-02-14 08:47:52.69'},{ts '2020-02-14 15:47:52.69'},'TENDER ACCEPT','Handle with care','GOOD','Fast driving');
+
 insert into Stop(ID,STOP_SEQ, NAME,CITY,STATE,POSTAL_CODE,COUNTRY,LATITUDE,LONGITUDE,CONTACT_NAME,SHIPMENT_ID) values
 (301,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','201'),
-(302,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','201');
+(302,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','201'),
+(303,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','202'),
+(304,99,'San Francisco','San Francisco','CA','95008','USA',37.3382,121.8863,'Donald Trump','202');
 
 insert into Check_Call (ID,CHECK_CALLTYPE,CREATED_DATE_TIME,LOCATION_NAME,LATITUDE,LONGITUDE,STATUS_DESC, STATUS_CODE,STOP_TYPE,CITY,
-STATE,COMMENTS,SHIPMENT_ID) values (101,'ARRIVAL',{ts '2020-02-13 18:47:52.69'},'GAR INFOBAN',40.873647,-109.392029,'Past Appointment Time ; 1.9 Hours BEHIND (Past Appointment without Arrival Call); Distance to Stop 43.09 miles',
-null,'DROPOFF','ANN ARBOR','MI','ON TIME',201);
+STATE,COMMENTS,SHIPMENT_ID) values 
+(101,'ARRIVAL',{ts '2020-02-13 18:47:52.69'},'GAR INFOBAN',33.1507,121.8863,'Distance to Stop 43.09 miles',
+null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
+(102,'LOADED',{ts '2020-02-13 18:47:52.69'},'GAR INFOBAN',33.1507,121.8863,'Distance to Stop 43.09 miles',
+null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
+(103,'DEPARTURE',{ts '2020-02-13 18:47:52.69'},'GAR INFOBAN',33.1507,121.8863,'Distance to Stop 43.09 miles',
+null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
+(104,'CHECKCALL',{ts '2020-02-14 15:43:50'},'GAR INFOBAN',33.4484,112.0740,'Distance to Stop 42.5 miles',
+null,null,'ANN ARBOR','MI','ON TIME',201);
 
