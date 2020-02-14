@@ -35,7 +35,7 @@ public class TrackingController {
 		List<ShipmentInfo> shipmentInfos = shipmentRepo.findAll();
 		List<ShipmentInfo> selectedShipmentInfo = new ArrayList<>();
 		shipmentInfos.forEach((shipment)->{
-			if("TENDER ACCEPT".equals(shipment.getStatus())) {
+			if(MEStatusEnum.TENDER_ACCEPT.name().equals(shipment.getStatus())) {
 				selectedShipmentInfo.add(shipment);
 			}
 		});
