@@ -1,8 +1,8 @@
 insert into Shipment_Info(ID,EARLIEST_ORIGIN_DATE,LATEST_ORIGIN_DATE,EARLIEST_DESTINATION_DATE,LATEST_DESTINATION_DATE,STATUS,COMMENTS,
 HEALTH_STATUS_CODE,HEALTH_REASON) values (201,{ts '2020-02-12 18:47:52.69'},{ts '2020-02-12 20:47:52.69'},
-{ts '2020-02-13 08:47:52.69'},{ts '2020-02-13 15:47:52.69'},'IN TRANSIT','Handle with care','GOOD','Fast driving'),
+{ts '2020-02-13 08:47:52.69'},{ts '2020-02-13 15:47:52.69'},'INTRANSIT','Handle with care','GOOD','Fast driving'),
 (202,{ts '2020-02-14 18:47:52.69'},{ts '2020-02-14 20:47:52.69'},
-{ts '2020-02-14 08:47:52.69'},{ts '2020-02-14 15:47:52.69'},'TENDER ACCEPT','Handle with care','GOOD','Fast driving');
+{ts '2020-02-14 08:47:52.69'},{ts '2020-02-14 15:47:52.69'},'TENDER_ACCEPT','Handle with care','GOOD','Fast driving');
 
 insert into Stop(ID,STOP_SEQ, NAME,CITY,STATE,POSTAL_CODE,COUNTRY,LATITUDE,LONGITUDE,CONTACT_NAME,SHIPMENT_ID) values
 (301,1,'Frisco','Dallas','TX','75033','USA', 33.1507,96.8236,'Chris Martin','201'),

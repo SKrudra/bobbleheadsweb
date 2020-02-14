@@ -1,6 +1,7 @@
 package com.transplace.LiveTracking.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.transplace.LiveTracking.constants.MEStatusEnum;
 import com.transplace.LiveTracking.model.CheckCall;
 import com.transplace.LiveTracking.model.ShipmentInfo;
 import com.transplace.LiveTracking.repo.CheckCallRepository;
@@ -52,8 +54,21 @@ public class TrackingController {
 	
 	@PostMapping("saveCheckCall" )
 	public void updateCheckCalls(@RequestBody CheckCallTO checkCallto) {
+		List<String> checkcalls =Arrays.asList("LOADED","UNLOADED","DEPARTURE");
 		CheckCall checkCall=checkCallto.covertToEntity();
 		checkCallRepository.save(checkCall);
+		if(checkcalls.contains(checkCall.getCheckCalltype())){
+			Optional<ShipmentInfo> shipmentInfo= shipmentRepo.findById(checkCall.getShipment().getId());
+			if (shipmentInfo.isPresent()) {
+				ShipmentInfo shipment =shipmentInfo.get();
+				if("PICKUP".equals(checkCall.getStopType())) {
+					shipment.setStatus(MEStatusEnum.INTRANSIT.toString());
+				}else {
+					shipment.setStatus(MEStatusEnum.DELIVERED.toString());
+				}
+			}
+			
+		}
 		
 	}
 
