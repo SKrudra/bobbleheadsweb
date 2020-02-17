@@ -7,8 +7,8 @@ HEALTH_STATUS_CODE,HEALTH_REASON) values (201,{ts '2020-02-12 18:47:52.69'},{ts 
 insert into Stop(ID,STOP_SEQ, NAME,CITY,STATE,POSTAL_CODE,COUNTRY,LATITUDE,LONGITUDE,CONTACT_NAME,SHIPMENT_ID) values
 (301,1,'Frisco','Dallas','TX','75033','USA', 37.33527476,-122.03254703,'Chris Martin','201'),
 (302,99,'San Francisco','San Francisco','CA','95008','USA',37.33981846,-122.08762326,'Donald Trump','201'),
-(303,1,'Frisco','Dallas','TX','75033','USA', 37.35614335,-122.11546778,'Chris Martin','202'),
-(304,99,'San Francisco','San Francisco','CA','95008','USA',37.37142067,-122.14297886,'Donald Trump','202');
+(303,1,'North De Anza Boulevard','Cupertino','CA','95014','USA', 37.33527476,-122.03254703,'Chris Martin','202'),
+(304,99,'I-280 North','Los Altos Hills','CA','94024','USA',37.33981846,-122.08762326,'Donald Trump','202');
 
 insert into Check_Call (ID,CHECK_CALLTYPE,CREATED_DATE_TIME,LOCATION_NAME,LATITUDE,LONGITUDE,STATUS_DESC, STATUS_CODE,STOP_TYPE,CITY,
 STATE,COMMENTS,SHIPMENT_ID) values 
@@ -19,5 +19,7 @@ null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
 (103,'DEPARTURE',{ts '2020-02-13 18:47:52.69'},'Frisco',37.35614335,-122.11546778,'Distance to Stop 43.09 miles',
 null,'PICKUP','ANN ARBOR','MI','ON TIME',201),
 (104,'CHECKCALL',{ts '2020-02-14 15:43:50'},'Phoenix',37.37142067,-122.14297886,'Distance to Stop 42.5 miles',
-null,null,'ANN ARBOR','MI','ON TIME',201);
+null,null,'ANN ARBOR','MI','ON TIME',201),
+(105,'ARRIVAL',{ts '2020-02-17 05:43:50'},'North De Anza Boulevard',37.33527476,-122.03254703,'Vehicle Arrived at Pickup',
+null,null,'Cupertino','CA','ON TIME',202);
 
