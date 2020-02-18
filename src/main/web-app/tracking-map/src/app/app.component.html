@@ -1,15 +1,15 @@
 <div style="width: 55%;  height:800px; float:left; margin:10px;">
   <div id="map" style="height:100%; width:100%;"></div>
 </div>
-<mat-card *ngIf="shipmentData">
-  <div>
-  <ul>
+<ul>
     <li><mat-icon>place</mat-icon>{{ '  PICKUP - ' +shipmentData.stops[0].city + ', '+ shipmentData.stops[0].state + ' (' + shipmentData.stops[0].postalCode + '), ' + shipmentData.stops[0].country }}</li>
     <li><mat-icon>place</mat-icon>{{'  DROPOFF - ' +shipmentData.stops[1].city + ', '+ shipmentData.stops[1].state + ' (' + shipmentData.stops[1].postalCode + '), ' + shipmentData.stops[1].country }}</li>
-  </ul>
-
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+</ul>
+<mat-card *ngIf="shipmentData">
+  
+  <mat-card-content>
+  <div class="container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -43,4 +43,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   </div>
+  </mat-card-content>
 </mat-card>
