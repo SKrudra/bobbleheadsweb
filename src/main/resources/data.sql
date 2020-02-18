@@ -8,7 +8,7 @@ insert into Stop(ID,STOP_SEQ, NAME,CITY,STATE,POSTAL_CODE,COUNTRY,LATITUDE,LONGI
 (301,1,'Frisco','Dallas','TX','75033','USA', 37.33527476,-122.03254703,'Chris Martin','201'),
 (302,99,'San Francisco','San Francisco','CA','95008','USA',37.33981846,-122.08762326,'Donald Trump','201'),
 (303,1,'North De Anza Boulevard','Cupertino','CA','95014','USA', 37.33527476,-122.03254703,'Chris Martin','202'),
-(304,99,'I-280 North','Los Altos Hills','CA','94024','USA',37.33981846,-122.08762326,'Donald Trump','202');
+(304,99,'I-280 North','Los Altos Hills','CA','94024','USA',37.3346491,-122.099107,'Donald Trump','202');
 
 insert into Check_Call (ID,CHECK_CALLTYPE,CREATED_DATE_TIME,LOCATION_NAME,LATITUDE,LONGITUDE,STATUS_DESC, STATUS_CODE,STOP_TYPE,CITY,
 STATE,COMMENTS,SHIPMENT_ID) values 
